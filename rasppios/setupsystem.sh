@@ -1,5 +1,5 @@
 #!/bin/bash
-export ANSIBLE_DATA=$PWD
+EXPORT ANSIBLE_DATA=$PWD
 
 #ansible-playbook 01_Tweaks.yml
 #ansible-playbook 02_Python_Packages.yml
