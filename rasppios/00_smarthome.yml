@@ -1,0 +1,195 @@
+---
+- name: Install SmarthomeNG
+  hosts: all
+  remote_user: root
+  become_user: root
+  become: true
+
+#  vars:
+#    apt_install:
+#      ["dialog",
+#      "rlwrap",
+#      "libatlas-base-dev",
+#      "libyaml-dev",
+#      "graphviz",
+#      "rrdtool",
+#      "librrd-dev"
+#      ]
+#    python_install:
+#      ["pymysql",
+#      "yolk3k",
+#      "cython",
+#      "recommonmark",
+#      "sphinx-rtd-theme",
+#      "sphinx==2.4"
+#      ]
+
+  tasks:
+#  - name: Create Group
+#    group:
+#      name: smarthome
+#      state: present
+
+  - name: Create User
+    user:
+      name: smarthome
+      shell: /bin/bash
+      groups: smarthome
+      append: no
+      update_password: always
+      password: ""
+      comment: 'SmarthomeNG User'
+
+ # - name: Groups
+ #   user:
+ #     name: smarthome
+ #     shell: /bin/bash
+ #     groups: www-data, sudo, i2c, adm, audio, video, plugdev, input, netdev, spi, gpio, dialout
+ #     append: yes
+
+  #- name: zwaveWheel
+  #  copy:
+  #    src: packages/python_openzwave-0.4.19-cp37-cp37m-linux_armv7l.whl
+  #    dest: /opt/python_openzwave-0.4.19-cp37-cp37m-linux_armv7l.whl
+  #    mode: 0777
+
+  #- name: zwave
+  #  pip:
+  #    name: /opt/python_openzwave-0.4.19-cp37-cp37m-linux_armv7l.whl
+  #    executable: pip3
+  #    extra_args: --user
+  #  become: true
+  #  become_user: smarthome
+
+#  - name: BluepyWheel
+#    copy:
+#      src: packages/bluepy-1.3.0-cp37-cp37m-linux_armv7l.whl
+#      dest: /opt/bluepy-1.3.0-cp37-cp37m-linux_armv7l.whl
+#      mode: 0777
+
+#  - name: Bluepy
+#    pip:
+#      name: /opt/bluepy-1.3.0-cp37-cp37m-linux_armv7l.whl
+#      executable: pip3
+#      extra_args: --user
+#    become: true
+#    become_user: smarthome
+
+#  - name: NumpyWheel
+#    copy:
+#      src: packages/numpy-1.18.2-cp37-cp37m-linux_armv7l.whl
+#      dest: /opt/numpy-1.18.2-cp37-cp37m-linux_armv7l.whl
+#      mode: 0777
+
+#  - name: Numpy
+#    pip:
+#      name: /opt/numpy-1.18.2-cp37-cp37m-linux_armv7l.whl
+#      executable: pip3
+#      extra_args: --user
+#    become: true
+#    become_user: smarthome
+
+#  - name: SciPyWheel
+#    copy:
+#      src: packages/scipy-1.4.1-cp37-cp37m-linux_armv7l.whl
+#      dest: /opt/scipy-1.4.1-cp37-cp37m-linux_armv7l.whl
+#      mode: 0777
+
+#  - name: SciPy
+#    pip:
+#      name: /opt/scipy-1.4.1-cp37-cp37m-linux_armv7l.whl
+#      executable: pip3
+#      extra_args: --user
+#    become: true
+#    become_user: smarthome
+
+#  - name: install apt
+#    apt:
+#      name: "{{ item }}"
+#      state: latest
+#      autoremove: yes
+#      autoclean: yes
+#    with_items: "{{ apt_install }}"
+
+#  - name: install modules
+#    pip:
+#      name: "{{ item }}"
+#      state: latest
+#      executable: pip3
+#      extra_args: --user
+#    become: true
+#    become_user: smarthome
+#    with_items: "{{ python_install }}"
+
+  - name: Git SmarthomeNG
+    git:
+      repo: 'git://github.com/smarthomeNG/smarthome.git'
+      dest: /usr/local/smarthome
+      version: master
+      force: yes
+    register: git
+  - debug: var=git
+
+  - name: Git Plugins
+    git:
+      repo: 'git://github.com/smarthomeNG/plugins.git'
+      dest: /usr/local/smarthome/plugins
+      version: master
+      force: yes
+    register: git2
+    ignore_errors: yes
+  - debug: var=git2
+
+#  - name: plugins ignore perm
+#    command: git config core.fileMode false chdir=/usr/local/smarthome/plugins
+
+#  - name: sh ignore perm
+#    command: git config core.fileMode false chdir=/usr/local/smarthome/
+
+#  - name: Change requirements
+#    file:
+#      path: /usr/local/smarthome/tools/build_requirements.py
+#      mode: 0777
+
+#  - name: Update requirements
+#    command: /usr/local/smarthome/tools/build_requirements.py
+
+#  - name: Install requirements
+#    pip:
+#        requirements: /usr/local/smarthome/requirements/base.txt
+#        executable: pip3
+#        state: latest
+#        extra_args: --user
+#    become: true
+#    become_user: smarthome
+
+#  - name: Copy Service
+#    copy:
+#      dest: /lib/systemd/system/smarthome.service
+#      src: configs/smarthome.service
+
+#  - name: Change Owner
+#    file:
+#      path: /usr/local/smarthome
+#      owner: smarthome
+#      group: smarthome
+#      mode: 0775
+#      recurse: yes
+#      state: directory
+
+#  - name: Remove astral
+#    pip: name=astral executable=pip3 state=absent
+
+#  - name: Restart smarthome service
+#    systemd: state=restarted name=smarthome.service
+
+#  - name: enable_service
+#    systemd: enabled=yes name=smarthome.service
+
+#  - name: List Modules
+#    command: "su smarthome -c 'yolk --list'"
+#    register: pip3
+#    ignore_errors: yes
+#    become: true
+#    become_user: smarthome
+#  - debug: var=pip3
