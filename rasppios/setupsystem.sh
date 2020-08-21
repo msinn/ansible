@@ -1,5 +1,5 @@
 #!/bin/bash
-EXPORT ANSIBLE_DATA=$PWD
+export ANSIBLE_DATA=$PWD
 
 ansible-playbook 00_update_system.yml
 
