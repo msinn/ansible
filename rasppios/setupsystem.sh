@@ -1,6 +1,8 @@
 #!/bin/bash
 EXPORT ANSIBLE_DATA=$PWD
 
+ansible-playbook 00_update_system.yml
+
 #ansible-playbook 01_Tweaks.yml
 #ansible-playbook 02_Python_Packages.yml
 #ansible-playbook 03_knxd.yml
