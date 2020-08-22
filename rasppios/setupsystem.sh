@@ -19,7 +19,6 @@ fi
 ../log_divider.sh
 #ansible-playbook 11_smarthome_start.yml
 
-
 #ansible-playbook 01_Tweaks.yml
 #ansible-playbook 02_Python_Packages.yml
 #ansible-playbook 03_knxd.yml

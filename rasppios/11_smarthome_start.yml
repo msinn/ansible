@@ -5,23 +5,27 @@
   become_user: root
   become: true
 
+  tasks:
   - name: Copy Service
     copy:
       dest: /lib/systemd/system/smarthome.service
       src: configs/smarthome.service
 
-  - name: Change Owner
+  - name: Change Owner of service definition
     file:
-      path: /usr/local/smarthome
-      owner: smarthome
+      path: /lib/systemd/system/smarthome.service
+      owner: root
       group: smarthome
-      mode: 0775
-      recurse: yes
+      mode: 0664
       state: directory
 
-#  - name: Restart smarthome service
-#    systemd: state=restarted name=smarthome.service
+  - name: Restart smarthome service
+    systemd:
+      name: smarthome.service
+      state: restarted
 
-#  - name: enable_service
-#    systemd: enabled=yes name=smarthome.service
-
+  - name: enable smarthome service
+    systemd: 
+      name: smarthome.service
+      enabled: yes
+    
