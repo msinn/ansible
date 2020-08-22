@@ -5,6 +5,9 @@
   become_user: root
   become: true
 
+  vars:
+    branch: master
+
 #  vars:
 #    apt_install:
 #      ["dialog",
@@ -125,7 +128,7 @@
     git:
       repo: 'git://github.com/smarthomeNG/smarthome.git'
       dest: /usr/local/smarthome
-      version: master
+      version: {{ branch }}
       force: yes
     register: git
   - debug: var=git
@@ -134,7 +137,7 @@
     git:
       repo: 'git://github.com/smarthomeNG/plugins.git'
       dest: /usr/local/smarthome/plugins
-      version: master
+      version: {{ branch }}
       force: yes
     register: git2
     ignore_errors: yes
