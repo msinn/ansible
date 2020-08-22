@@ -19,10 +19,10 @@ fi
 ../log_divider.sh
 
 ansible-playbook 30_knxd_install.yml
-#ansible-playbook 31_mqtt_install.yml
-#ansible-playbook 32_1wire_install.yml
+ansible-playbook 31_mqtt_install.yml
+ansible-playbook 32_1wire_install.yml
 
-#ansible-playbook 21_smarthome_start.yml
+ansible-playbook 21_smarthome_start.yml
 
 
 
