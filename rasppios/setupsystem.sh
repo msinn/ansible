@@ -1,5 +1,6 @@
 #!/bin/bash
 export ANSIBLE_DATA=$PWD
+sudo chmod 666 $ANSIBLE_LOG_PATH
 
 ansible-playbook 00_update_system.yml
 ansible-playbook 01_python_installs.yml

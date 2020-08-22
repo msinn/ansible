@@ -148,7 +148,7 @@
       path: /usr/local/smarthome
       owner: smarthome
       group: smarthome
-      mode: u=rwX,g=rX,o=rX
+      mode: u=rwX,g=rwX,o=rX
       recurse: yes
       state: directory
 
