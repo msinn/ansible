@@ -1,5 +1,5 @@
 ---
-- name: Install SmarthomeNG
+- name: Install SmarthomeNG (master)
   hosts: all
   remote_user: root
   become_user: root
