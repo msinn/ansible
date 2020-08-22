@@ -2,7 +2,7 @@
 - name: "Include: Create users and groups"
   import_playbook: 10_users_groups.yml
 
-- name: Install MQTT broker
+- name: Install 1-wire support owserver
   hosts: all
   remote_user: root
   become_user: root
@@ -10,14 +10,18 @@
 
   vars:
     chmod_files:
-      ["/lib/systemd/system/mosquitto.service",
-      "/etc/mosquitto/mosquitto.conf"
+      ["/lib/systemd/system/owhttpd.service",
+      "/lib/systemd/system/owserver.service",
+      "/lib/systemd/system/owserver.socket",
+      "/etc/owfs.conf"
       ]
 
   tasks:
-  - name: Install mosquitto
+  - name: Install 1-wire support
     apt:
-      name: mosquitto
+      name: 
+      - owhttpd
+      - owserver
       state: latest
 
   - name: Change permissions for configuration files
@@ -27,4 +31,3 @@
       mode: 0664
       state: file
     with_items: "{{ chmod_files }}"
-

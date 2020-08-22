@@ -8,42 +8,24 @@
   become_user: root
   become: true
 
+  vars:
+    chmod_files:
+      ["/lib/systemd/system/knxd.service",
+      "/lib/systemd/system/knxd.socket",
+      "/etc/knxd.conf",
+      "/etc/knxd.ini"
+      ]
+
   tasks:
   - name: Install knxd
     apt:
       name: knxd
       state: latest
 
-  - name: Change Owner of knxd service definition
-    file:
-      path: /lib/systemd/system/knxd.service
-      group: smarthome
-      mode: 0664
-      state: file
-
-  - name: Change Owner of knxd socket definition
-    file:
-      path: /lib/systemd/system/knxd.socket
-      group: smarthome
-      mode: 0664
-      state: file
-
   - name: Copy knxd.conf (with an example)
     copy:
       dest: /etc/knxd.conf
       src: configs/knxd.conf
-
-  - name: Change Owner of knxd.conf
-    file:
-      path: /etc/knxd.conf
-      group: smarthome
-      mode: 0664
-      state: file
-
-  - name: Copy knxd.ini
-    copy:
-      dest: /etc/knxd.ini
-      src: configs/knxd.ini
 
   - name: Change Owner of knxd.ini
     file:
@@ -52,3 +34,10 @@
       mode: 0664
       state: file
 
+  - name: Change permissions for configuration files
+    file:
+      path: "{{ item }}"
+      group: smarthome
+      mode: 0664
+      state: file
+    with_items: "{{ chmod_files }}"
