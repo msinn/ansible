@@ -11,13 +11,18 @@ ansible-playbook 01_python_installs.yml
 
 ../log_divider.sh
 if [ -f "${TOOLSDIR}/dev-sh" ]; then
-    ansible-playbook 20_smarthome_install_develop.yml
+    ansible-playbook 20_smarthome_install.yml --extra-vars "branch=develop"
 else
-    ansible-playbook 20_smarthome_install_master.yml
+    ansible-playbook 20_smarthome_install.yml
 fi
 
 ../log_divider.sh
-#ansible-playbook 11_smarthome_start.yml
+
+#ansible-playbook 30_knxd_install.yml
+
+#ansible-playbook 21_smarthome_start.yml
+
+
 
 #ansible-playbook 01_Tweaks.yml
 #ansible-playbook 02_Python_Packages.yml

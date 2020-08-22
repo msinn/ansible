@@ -1,12 +1,15 @@
 ---
-- name: Install SmarthomeNG (master)
+- name: "Include: Create users and groups"
+  import_playbook: 10_users_groups.yml
+
+- name: Install SmarthomeNG
   hosts: all
   remote_user: root
   become_user: root
   become: true
 
   vars:
-    branch: master
+    branch: develop
 
 #  vars:
 #    apt_install:
@@ -28,20 +31,21 @@
 #      ]
 
   tasks:
-  - name: Create Group
-    group:
-      name: smarthome
-      state: present
+  # - name: Create Group
+  #   group:
+  #     name: smarthome
+  #     state: present
 
-  - name: Create User
-    user:
-      name: smarthome
-      shell: /bin/bash
-      groups: smarthome
-      append: no
-      update_password: always
-      password: ""
-      comment: 'SmarthomeNG User'
+  # - name: Create User
+  #   user:
+  #     name: smarthome
+  #     shell: /bin/bash
+  #     groups: smarthome
+  #     append: no
+  #     update_password: always
+  #     password: ""
+  #     comment: 'SmarthomeNG User'
+
 
  # - name: Groups
  #   user:
@@ -124,7 +128,7 @@
 #    become_user: smarthome
 #    with_items: "{{ python_install }}"
 
-  - name: Git SmarthomeNG
+  - name: "Git SmarthomeNG ({{branch}})"
     git:
       repo: 'git://github.com/smarthomeNG/smarthome.git'
       dest: /usr/local/smarthome
@@ -133,7 +137,7 @@
     register: git
   - debug: var=git
 
-  - name: Git Plugins
+  - name: "Git Plugins ({{branch}})"
     git:
       repo: 'git://github.com/smarthomeNG/plugins.git'
       dest: /usr/local/smarthome/plugins
@@ -142,26 +146,6 @@
     register: git2
     ignore_errors: yes
   - debug: var=git2
-
-  - name: Create empty file 'all.txt' in smarthome/requirements
-    file:
-      path: "/usr/local/smarthome/requirements/all.txt"
-      state: touch
-
-  - name: Create empty file 'base.txt' in smarthome/requirements
-    file:
-      path: "/usr/local/smarthome/requirements/base.txt"
-      state: touch
-
-  - name: Create empty file 'conf_all.txt' in smarthome/requirements
-    file:
-      path: "/usr/local/smarthome/requirements/conf_all.txt"
-      state: touch
-
-  - name: Create empty file 'test.txt' in smarthome/requirements
-    file:
-      path: "/usr/local/smarthome/requirements/test.txt"
-      state: touch
 
   - name: Change Owner of SmartHomeNG installation
     file:
