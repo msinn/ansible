@@ -5,7 +5,13 @@ sudo chmod 666 $ANSIBLE_LOG_PATH
 ansible-playbook 00_update_system.yml
 ansible-playbook 01_python_installs.yml
 
-#ansible-playbook 10_smarthome_install.yml
+if [ -f "${TOOLSDIR}/dev-sh" ]; then
+    #ansible-playbook 10_smarthome_install_develop.yml
+else
+    #ansible-playbook 10_smarthome_install_master.yml
+fi
+
+ansible-playbook 10_smarthome_install.yml
 #ansible-playbook 11_smarthome_start.yml
 
 
