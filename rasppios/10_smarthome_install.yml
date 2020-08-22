@@ -143,6 +143,15 @@
     ignore_errors: yes
   - debug: var=git2
 
+  - name: Change Owner of SmartHomeNG installation
+    file:
+      path: /usr/local/smarthome
+      owner: smarthome
+      group: smarthome
+      mode: u=rwX,g=rX,o=rX
+      recurse: yes
+      state: directory
+
 #  - name: plugins ignore perm
 #    command: git config core.fileMode false chdir=/usr/local/smarthome/plugins
 
