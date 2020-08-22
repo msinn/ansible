@@ -6,9 +6,9 @@ ansible-playbook 00_update_system.yml
 ansible-playbook 01_python_installs.yml
 
 if [ -f "${TOOLSDIR}/dev-sh" ]; then
-    #ansible-playbook 10_smarthome_install_develop.yml
+    ansible-playbook 10_smarthome_install_develop.yml
 else
-    #ansible-playbook 10_smarthome_install_master.yml
+    ansible-playbook 10_smarthome_install_master.yml
 fi
 
 ansible-playbook 10_smarthome_install.yml

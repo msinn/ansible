@@ -128,7 +128,7 @@
     git:
       repo: 'git://github.com/smarthomeNG/smarthome.git'
       dest: /usr/local/smarthome
-      version: {{ branch }}
+      version: "{{ branch }}"
       force: yes
     register: git
   - debug: var=git
@@ -137,11 +137,31 @@
     git:
       repo: 'git://github.com/smarthomeNG/plugins.git'
       dest: /usr/local/smarthome/plugins
-      version: {{ branch }}
+      version: "{{ branch }}"
       force: yes
     register: git2
     ignore_errors: yes
   - debug: var=git2
+
+  - name: Create empty file 'all.txt' in smarthome/requirements
+    file:
+      path: "/usr/local/smarthome/requirements/all.txt"
+      state: touch
+
+  - name: Create empty file 'base.txt' in smarthome/requirements
+    file:
+      path: "/usr/local/smarthome/requirements/base.txt"
+      state: touch
+
+  - name: Create empty file 'conf_all.txt' in smarthome/requirements
+    file:
+      path: "/usr/local/smarthome/requirements/conf_all.txt"
+      state: touch
+
+  - name: Create empty file 'test.txt' in smarthome/requirements
+    file:
+      path: "/usr/local/smarthome/requirements/test.txt"
+      state: touch
 
   - name: Change Owner of SmartHomeNG installation
     file:
