@@ -40,7 +40,7 @@
       groups: smarthome
       append: no
       update_password: always
-      password: "shng"
+      password: ""
       comment: 'SmarthomeNG User'
 
  # - name: Groups
@@ -128,7 +128,7 @@
     git:
       repo: 'git://github.com/smarthomeNG/smarthome.git'
       dest: /usr/local/smarthome
-      version: {{ branch }}
+      version: "{{ branch }}"
       force: yes
     register: git
   - debug: var=git
@@ -137,7 +137,7 @@
     git:
       repo: 'git://github.com/smarthomeNG/plugins.git'
       dest: /usr/local/smarthome/plugins
-      version: {{ branch }}
+      version: "{{ branch }}"
       force: yes
     register: git2
     ignore_errors: yes
