@@ -1,6 +1,6 @@
 #!/bin/bash
 export TOOLSDIR=/usr/local/shng
-export ANSIBLE_LOG_PATH={$TOOLSDIR}/logs
+export ANSIBLE_LOG_PATH=$TOOLSDIR/logs
 export ANSIBLE_DATA=$PWD
 
 sudo chmod 666 $ANSIBLE_LOG_PATH
