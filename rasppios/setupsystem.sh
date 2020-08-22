@@ -1,17 +1,19 @@
 #!/bin/bash
 export ANSIBLE_DATA=$PWD
 sudo chmod 666 $ANSIBLE_LOG_PATH
+sudo chmod +x ../log_divider
 
 ansible-playbook 00_update_system.yml
 ansible-playbook 01_python_installs.yml
 
+../log_divider
 if [ -f "${TOOLSDIR}/dev-sh" ]; then
     ansible-playbook 10_smarthome_install_develop.yml
 else
     ansible-playbook 10_smarthome_install_master.yml
 fi
 
-ansible-playbook 10_smarthome_install.yml
+../log_divider
 #ansible-playbook 11_smarthome_start.yml
 
 
