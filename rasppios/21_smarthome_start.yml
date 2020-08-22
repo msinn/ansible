@@ -14,10 +14,9 @@
   - name: Change Owner of service definition
     file:
       path: /lib/systemd/system/smarthome.service
-      owner: root
       group: smarthome
       mode: 0664
-      state: directory
+      state: file
 
   - name: Restart smarthome service
     systemd:

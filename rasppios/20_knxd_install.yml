@@ -1,0 +1,12 @@
+---
+- name: Install KNXD
+  hosts: all
+  remote_user: root
+  become_user: root
+  become: true
+
+  tasks:
+  - name: Install knxd
+    apt:
+      name: knxd
+      state: latest
