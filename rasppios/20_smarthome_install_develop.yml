@@ -1,5 +1,5 @@
 ---
-- name: Install SmarthomeNG (develop)
+- name: Install SmarthomeNG
   hosts: all
   remote_user: root
   become_user: root
@@ -29,7 +29,7 @@
 
   tasks:
   - name: "Include: Create users and groups"
-    include: 10_users_groups.yaml
+    include: 10_users_groups.yml
 
   # - name: Create Group
   #   group:
@@ -128,7 +128,7 @@
 #    become_user: smarthome
 #    with_items: "{{ python_install }}"
 
-  - name: Git SmarthomeNG
+  - name: "Git SmarthomeNG ({{branch}})"
     git:
       repo: 'git://github.com/smarthomeNG/smarthome.git'
       dest: /usr/local/smarthome
@@ -137,7 +137,7 @@
     register: git
   - debug: var=git
 
-  - name: Git Plugins
+  - name: "Git Plugins ({{branch}})"
     git:
       repo: 'git://github.com/smarthomeNG/plugins.git'
       dest: /usr/local/smarthome/plugins
