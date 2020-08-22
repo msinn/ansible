@@ -6,14 +6,14 @@ sudo chmod +x ../log_divider
 ansible-playbook 00_update_system.yml
 ansible-playbook 01_python_installs.yml
 
-../log_divider
+../log_divider.sh
 if [ -f "${TOOLSDIR}/dev-sh" ]; then
     ansible-playbook 10_smarthome_install_develop.yml
 else
     ansible-playbook 10_smarthome_install_master.yml
 fi
 
-../log_divider
+../log_divider.sh
 #ansible-playbook 11_smarthome_start.yml
 
 
