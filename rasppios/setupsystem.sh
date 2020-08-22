@@ -3,6 +3,10 @@ export ANSIBLE_DATA=$PWD
 
 ansible-playbook 00_update_system.yml
 
+#ansible-playbook 01_smarthome_install.yml
+#ansible-playbook 01_smarthome_start.yml
+
+
 #ansible-playbook 01_Tweaks.yml
 #ansible-playbook 02_Python_Packages.yml
 #ansible-playbook 03_knxd.yml
