@@ -1,0 +1,61 @@
+---
+- name: "Include: Create users and groups"
+  import_playbook: 10_users_groups.yml
+
+- name: Install MQTT broker
+  hosts: all
+  remote_user: root
+  become_user: root
+  become: true
+
+  vars:
+    chmod_files:
+      ["/lib/systemd/system/owhttpd.service",
+      "/lib/systemd/system/owserver.service",
+      "/lib/systemd/system/owserver.socket",
+      "/etc/owfs.conf"
+      ]
+
+  tasks:
+  - name: Install 1-wire support
+    apt:
+      name: 
+      - owhttpd
+      - owserver
+      state: latest
+
+  # - name: Change Owner of owhttpd service definition
+  #   file:
+  #     path: /lib/systemd/system/owhttpd.service
+  #     group: smarthome
+  #     mode: 0664
+  #     state: file
+
+  # - name: Change Owner of owserver service definition
+  #   file:
+  #     path: /lib/systemd/system/owserver.service
+  #     group: smarthome
+  #     mode: 0664
+  #     state: file
+
+  # - name: Change Owner of owserver socket definition
+  #   file:
+  #     path: /lib/systemd/system/owserver.socket
+  #     group: smarthome
+  #     mode: 0664
+  #     state: file
+
+  # - name: Change Owner of owfs.conf
+  #   file:
+  #     path: /etc/owfs.conf
+  #     group: smarthome
+  #     mode: 0664
+  #     state: file
+
+  - name: Change permissions for configuration files
+    file:
+      path: "{{ item }}"
+      group: smarthome
+      mode: 0664
+      state: file
+    with_items: "{{ chmod_files }}"

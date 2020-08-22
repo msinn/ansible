@@ -1,0 +1,30 @@
+---
+- name: "Include: Create users and groups"
+  import_playbook: 10_users_groups.yml
+
+- name: Install MQTT broker
+  hosts: all
+  remote_user: root
+  become_user: root
+  become: true
+
+  tasks:
+  - name: Install mosquitto
+    apt:
+      name: mosquitto
+      state: latest
+
+  - name: Change Owner of mosquitto service definition
+    file:
+      path: /lib/systemd/system/mosquitto.service
+      group: smarthome
+      mode: 0664
+      state: file
+
+  - name: Change Owner of mosquitto.conf
+    file:
+      path: /etc/mosquitto/mosquitto.conf
+      group: smarthome
+      mode: 0664
+      state: file
+
