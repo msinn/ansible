@@ -24,11 +24,15 @@
   #   systemd: state=restarted name=php7.3-fpm.service
 
   - name: Restart apache2
-    systemd: state=restarted name=apache2.service
+    systemd: 
+      state: restarted
+      name: apache2.service
 
   - name: Restart nginx
-    systemd: state=restarted name=nginx.service
-
+    systemd: 
+      state: restarted
+      name: nginx.service
+    ignore_errors: yes
 
 
 
