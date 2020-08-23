@@ -23,11 +23,23 @@
   # - name: Restart php
   #   systemd: state=restarted name=php7.3-fpm.service
 
-- name: Populate service facts
-  service_facts:
+  - name: Restart apache2
+    systemd: state=restarted name=apache2.service
 
-- debug:
-    var: ansible_facts.services
+  - name: Restart nginx
+    systemd: state=restarted name=nginx.service
+
+
+
+
+  - name: Populate service facts
+    service_facts:
+
+  - name: Debug services_facts
+    debug:
+      var: ansible_facts.services["apache2"]
+
+
 
 
 # sudo systemctl restart apache2
