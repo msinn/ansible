@@ -27,6 +27,7 @@
     systemd: 
       state: restarted
       name: apache2.service
+    ignore_errors: yes
 
   - name: Restart nginx
     systemd: 
@@ -42,11 +43,5 @@
   - name: Debug services_facts
     debug:
       var: ansible_facts.services["apache2"]
-
-
-
-
-# sudo systemctl restart apache2
-# or sudo /etc/init.d/apache2 restart
-
-# sudo /etc/init.d/nginx restart
+    debug:
+      var: ansible_facts.services["apache2.state"]
