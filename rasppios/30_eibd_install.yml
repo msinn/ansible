@@ -25,10 +25,10 @@
       src: packages/eibd_0.0.5-1_armhf.deb
       dest: /etc/deb-files/
 
-  # - name: Copy pthsem deb
-  #   copy:
-  #     src: packages/pthsem_2.0.8-1_armhf.deb
-  #     dest: /etc/deb-files/
+  - name: Copy pthsem deb
+    copy:
+      src: packages/pthsem_2.0.8-1_armhf.deb
+      dest: /etc/deb-files/
 
   - name: Copy eibdscript
     copy:
