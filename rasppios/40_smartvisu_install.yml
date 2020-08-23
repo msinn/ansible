@@ -2,6 +2,9 @@
 - name: "Include: Create users and groups"
   import_playbook: 10_users_groups.yml
 
+- name: "Include: Install PHP"
+  import_playbook: 04_php_install.yml
+
 - name: Install smartVISU
   hosts: all
   remote_user: root
@@ -31,15 +34,6 @@
       mode: u=rwX,g=rwX,o=rX
       recurse: yes
       state: directory
-
-  - name: mbstring
-    apt: name=php-mbstring force=no state=latest
-
-  # - name: xml
-  #   apt: name=php7.3-xml force=no state=latest
-
-  # - name: Restart php
-  #   systemd: state=restarted name=php7.3-fpm.service
 
   # - name: Restart nginx
   #   systemd: state=restarted name=nginx

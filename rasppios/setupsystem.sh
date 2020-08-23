@@ -10,6 +10,8 @@ ansible-playbook 00_update_system.yml
 ansible-playbook 01_python_installs.yml
 ansible-playbook 02_apache_install.yml
 
+#ansible-playbook 04_php_install.yml    # should be done by smartVISU install
+
 if [ -f "${TOOLSDIR}/dev-sh" ]; then
     ansible-playbook 20_smarthome_install.yml --extra-vars "branch=develop"
 else
