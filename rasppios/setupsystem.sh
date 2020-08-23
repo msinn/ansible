@@ -18,7 +18,7 @@ else
     ansible-playbook 20_smarthome_install.yml
 fi
 
-ansible-playbook 30_knxd_install.yml
+#ansible-playbook 30_knxd_install.yml
 #ansible-playbook 30_eibd_install.yml
 ansible-playbook 31_mqtt_install.yml
 ansible-playbook 32_1wire_install.yml
