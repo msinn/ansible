@@ -23,25 +23,28 @@
   # - name: Restart php
   #   systemd: state=restarted name=php7.3-fpm.service
 
+  - name: Populate service facts
+    service_facts:
+
   - name: Restart apache2
     systemd: 
       state: restarted
       name: apache2.service
-    ignore_errors: yes
+    when: ansible_facts.services["apache2"]["state"] == "running"
 
   - name: Restart nginx
     systemd: 
       state: restarted
       name: nginx.service
-    ignore_errors: yes
+    when: ansible_facts.services["nginx"]["state"] == "running"
 
 
 
-  - name: Populate service facts
-    service_facts:
 
   - name: Debug services_facts
     debug:
-      var: ansible_facts.services["apache2"]
+      var: ansible_facts.services["apache2"]["state"]
+
+  - name: Debug services_facts (nginx)
     debug:
-      var: ansible_facts.services["apache2.state"]
+      var: ansible_facts.services["nginx"]["state"]
