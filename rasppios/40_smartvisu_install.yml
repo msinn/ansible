@@ -9,7 +9,7 @@
   become: true
 
   vars:
-    branch: develop
+    branch: master
     htmlpath: /var/www/html
     smartvisudir: smartvisu
 
