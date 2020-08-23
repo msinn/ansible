@@ -8,19 +8,25 @@ sudo chmod +x ../log_divider.sh
 
 ansible-playbook 00_update_system.yml
 ansible-playbook 01_python_installs.yml
+ansible-playbook 02_apache_install.yml
 
-../log_divider.sh
 if [ -f "${TOOLSDIR}/dev-sh" ]; then
     ansible-playbook 20_smarthome_install.yml --extra-vars "branch=develop"
 else
     ansible-playbook 20_smarthome_install.yml
 fi
 
-../log_divider.sh
-
 ansible-playbook 30_knxd_install.yml
+#ansible-playbook 30_eibd_install.yml
 ansible-playbook 31_mqtt_install.yml
 ansible-playbook 32_1wire_install.yml
+
+if [ -f "${TOOLSDIR}/dev-sv" ]; then
+#    ansible-playbook 40_smartvisu_install.yml --extra-vars "branch=develop"
+else
+#    ansible-playbook 40_smartvisu_install.yml
+fi
+
 
 ansible-playbook 21_smarthome_start.yml
 

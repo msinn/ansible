@@ -22,17 +22,20 @@
       name: knxd
       state: latest
 
+  - name: Install knxdtools
+    apt:
+      name: knxd-tools
+      state: latest
+
   - name: Copy knxd.conf (with an example)
     copy:
       dest: /etc/knxd.conf
       src: configs/knxd.conf
 
-  - name: Change Owner of knxd.ini
-    file:
-      path: /etc/knxd.ini
-      group: smarthome
-      mode: 0664
-      state: file
+  - name: Copy knxd.ini (an example)
+    copy:
+      dest: /etc/knxd.ini
+      src: configs/knxd.ini
 
   - name: Change permissions for configuration files
     file:
