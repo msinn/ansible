@@ -23,3 +23,14 @@
   # - name: Restart php
   #   systemd: state=restarted name=php7.3-fpm.service
 
+- name: Populate service facts
+  service_facts:
+
+- debug:
+    var: ansible_facts.services
+
+
+# sudo systemctl restart apache2
+# or sudo /etc/init.d/apache2 restart
+
+# sudo /etc/init.d/nginx restart

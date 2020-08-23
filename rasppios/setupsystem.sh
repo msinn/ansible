@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set +e
+
 export TOOLSDIR=/usr/local/shng
 export ANSIBLE_LOG_PATH=$TOOLSDIR/logs/ansible.log
 export ANSIBLE_DATA=$PWD
