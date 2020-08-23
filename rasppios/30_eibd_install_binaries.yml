@@ -69,3 +69,11 @@
     with_items: "{{ chmod_files }}"
 
 
+  # sudo dpkg -i /etc/deb-files/pthsem_2.0.8-1_armhf.deb
+  # sudo dpkg -i /etc/deb-files/eibd_0.0.5-1_armhf.deb
+  # sudo ldconfig
+  # sudo update-rc.d eibd defaults
+  # sudo systemctl start eibd
+  # sudo systemctl enable eibd
+  # sudo systemctl disable knxd.service &> /dev/null
+  # sudo systemctl disable knxd.socket &> /dev/null
