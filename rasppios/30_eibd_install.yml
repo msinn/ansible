@@ -10,7 +10,7 @@
 
   vars:
     chmod_files:
-      ["/etc/default/eibd/eibd.ini"
+      ["/etc/default/eibd"
       ]
 
   tasks:
@@ -51,7 +51,7 @@
   - name: Copy eibd conf
     copy:
       src: configs/eibd.ini
-      dest: /etc/default/eibd/eibd.ini
+      dest: /etc/default/eibd
 
   - name: eibdlog
     lineinfile:
