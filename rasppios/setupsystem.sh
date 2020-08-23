@@ -3,11 +3,10 @@
 set +e
 
 export TOOLSDIR=/usr/local/shng
-export ANSIBLE_LOG_PATH=$TOOLSDIR/logs/ansible.log
+export ANSIBLE_LOG_PATH=$TOOLSDIR/ansible.log
 export ANSIBLE_DATA=$PWD
 
 sudo chmod 666 $ANSIBLE_LOG_PATH
-sudo chmod +x ../log_divider.sh
 
 ansible-playbook 00_update_system.yml
 ansible-playbook 01_python_installs.yml
@@ -21,16 +20,17 @@ else
     ansible-playbook 20_smarthome_install.yml
 fi
 
-#ansible-playbook 30_knxd_install.yml
+ansible-playbook 30_knxd_install.yml
 #ansible-playbook 30_eibd_install.yml
 ansible-playbook 31_mqtt_install.yml
 ansible-playbook 32_1wire_install.yml
 
 if [ -f "${TOOLSDIR}/dev-sv" ]; then
-#    ansible-playbook 40_smartvisu_install.yml --extra-vars "branch=develop"
+    ansible-playbook 40_smartvisu_install.yml --extra-vars "branch=develop"
 else
-#    ansible-playbook 40_smartvisu_install.yml
+    ansible-playbook 40_smartvisu_install.yml
 fi
+ansible-playbook 41_smartvisu28_install.yml
 
 
 ansible-playbook 21_smarthome_start.yml

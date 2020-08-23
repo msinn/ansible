@@ -23,6 +23,7 @@
       - owhttpd
       - owserver
       state: latest
+    ignore_errors: yes
 
   - name: Change permissions for configuration files
     file:
