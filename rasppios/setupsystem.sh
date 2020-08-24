@@ -14,6 +14,8 @@ ansible-playbook 02_apache_install.yml
 
 #ansible-playbook 04_php_install.yml    # should be done by smartVISU install
 
+ansible-playbook 08_raspberrypi_installs.yml
+
 if [ -f "${TOOLSDIR}/dev-sh" ]; then
     ansible-playbook 20_smarthome_install.yml --extra-vars "branch=develop"
 else
